@@ -4,27 +4,26 @@ import com.polarbookshop.catalog_service.domain.Book;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BookValidationTests {
 
     private static Validator validator;
 
     @BeforeAll
-    static void setUp(){
+    static void setUp() {
         validator = Validation.buildDefaultValidatorFactory().getValidator();
     }
 
     @Test
-    void whenAllFieldCorrectThenValidationSucceeds(){
+    void whenAllFieldCorrectThenValidationSucceeds() {
         var book = new Book(
                 "1232567890",
                 "Spring in action",
@@ -33,11 +32,11 @@ public class BookValidationTests {
         );
 
         Set<ConstraintViolation<Book>> validate = validator.validate(book);
-        assertTrue(validate.isEmpty());
+        assertThat(validate).isEmpty();
     }
 
     @Test
-    void whenIsbnDefinedButIncorrectThenValidationFailed(){
+    void whenIsbnDefinedButIncorrectThenValidationFailed() {
         var book = new Book(
                 "ISBN11",
                 "spring boot in action",
@@ -45,9 +44,9 @@ public class BookValidationTests {
                 new BigDecimal("100.00")
         );
         Set<ConstraintViolation<Book>> validate = validator.validate(book);
-        assertFalse(validate.isEmpty());
-        assertEquals(validate.size(), 1);
+        assertThat(validate).isNotEmpty();
+        assertThat(validate).hasSize(1);
         String errorMessage = validate.iterator().next().getMessage();
-        assertEquals(errorMessage, "The ISBN format must be valid. eg: ISBN-10 or ISBN-13");
+        assertThat(errorMessage).isEqualTo("The ISBN format must be valid. eg: ISBN-10 or ISBN-13");
     }
 }
