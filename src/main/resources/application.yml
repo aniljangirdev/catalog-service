@@ -12,3 +12,7 @@ server:
       max: 50 # default: 200
       min-spare: 5 # min thread always be running default: 10
 
+polar:
+  greeting: Welcome to the book catalog!
+  testData:
+    enabled: false
