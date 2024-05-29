@@ -1,7 +1,19 @@
 spring:
   application:
     name: catalog-service
-
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      uri: http://localhost:8888
+      request-connect-timeout: 5000     # making spring cloud config client to more resilient
+      request-read-timeout: 5000   # and make application fail-fast
+      fail-fast: true # retry is only work when this property is enabled
+      retry:
+        max-attempts: 6
+        initial-interval: 1000 #(ms)
+        max-interval: 2000
+        multiplier: 1.1
 # configure tomcat server
 server:
   port: 9001
@@ -16,3 +28,11 @@ polar:
   greeting: Welcome to the book catalog!
   testData:
     enabled: false
+
+
+# enable actuator expose the refresh endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
