@@ -2,8 +2,6 @@ package com.polarbookshop.catalog_service.service;
 
 import com.polarbookshop.catalog_service.domain.Book;
 import com.polarbookshop.catalog_service.repository.BookRepository;
-import com.polarbookshop.catalog_service.repository.InMemoryBookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -32,19 +30,23 @@ public class BookService {
     }
 
     public Book createBook(Book book) {
-        return bookRepository.saveBook(book);
+        return bookRepository.save(book);
     }
 
     public Book updateBook(Book book, String isbn) {
         return Optional.ofNullable(bookRepository.findByIsbn(isbn))
                 .map(existingBook -> {
                     var newBook = new Book(
+                            existingBook.id(),
+                            existingBook.createdDate(),
+                            existingBook.lastModifiedDate(),
                             book.isbn(),
                             book.title(),
                             book.author(),
-                            book.price()
+                            book.price(),
+                            existingBook.version()
                     );
-                    return bookRepository.saveBook(newBook);
+                    return bookRepository.save(newBook);
                 })
                 .orElseGet(() -> createBook(book));
     }
