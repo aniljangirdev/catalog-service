@@ -3,8 +3,6 @@ spring:
     name: catalog-service
   config:
     import: "optional:configserver:"
-
-  # configure config server
   cloud:
     config:
       uri: http://localhost:8888
