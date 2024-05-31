@@ -28,12 +28,14 @@ public class BookDataLoader {
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadData() {
-        var book = new Book(
+        bookRepository.deleteAll();
+
+        var book = Book.of(
                 "1234567890",
                 "Spring in action",
                 "JOHHN",
                 new BigDecimal("30.20")
         );
-        bookRepository.saveBook(book);
+        bookRepository.save(book);
     }
 }

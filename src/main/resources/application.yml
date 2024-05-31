@@ -3,17 +3,32 @@ spring:
     name: catalog-service
   config:
     import: "optional:configserver:"
+
+  # configure config server
   cloud:
     config:
       uri: http://localhost:8888
       request-connect-timeout: 5000     # making spring cloud config client to more resilient
       request-read-timeout: 5000   # and make application fail-fast
-      fail-fast: true # retry is only work when this property is enabled
+      fail-fast: false # retry is only work when this property is enabled
       retry:
         max-attempts: 6
         initial-interval: 1000 #(ms)
         max-interval: 2000
         multiplier: 1.1
+
+  #configure postgres database
+  datasource:
+    username: user
+    password: password
+    url: jdbc:postgresql://localhost:5432/polardb_catalog
+    hikari:
+      connection-timeout: 2000
+      maximum-pool-size: 5
+  sql:
+    init:
+      mode: always
+
 # configure tomcat server
 server:
   port: 9001
@@ -27,7 +42,7 @@ server:
 polar:
   greeting: Welcome to the book catalog!
   testData:
-    enabled: false
+    enabled: true
 
 
 # enable actuator expose the refresh endpoint
