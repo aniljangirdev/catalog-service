@@ -4,7 +4,6 @@ import com.polarbookshop.catalog_service.domain.Book;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +23,7 @@ public class BookValidationTests {
 
     @Test
     void whenAllFieldCorrectThenValidationSucceeds() {
-        var book = new Book(
+        var book = Book.of(
                 "1232567890",
                 "Spring in action",
                 "JOHHNN",
@@ -37,7 +36,7 @@ public class BookValidationTests {
 
     @Test
     void whenIsbnDefinedButIncorrectThenValidationFailed() {
-        var book = new Book(
+        var book = Book.of(
                 "ISBN11",
                 "spring boot in action",
                 "JEKKY",

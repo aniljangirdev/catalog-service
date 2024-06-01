@@ -23,7 +23,8 @@ public class BookService {
     }
 
     public Book findBookByIsbn(String isbn) {
-        return bookRepository.findByIsbn(isbn);
+        return Optional.ofNullable(bookRepository.findByIsbn(isbn))
+                .orElseThrow(() -> new BookNotFoundException(String.format("book not find with isbn:%s:", isbn)));
     }
 
     public void deleteByIsbn(String isbn) {

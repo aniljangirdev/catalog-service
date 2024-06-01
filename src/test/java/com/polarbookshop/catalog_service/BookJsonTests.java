@@ -23,7 +23,7 @@ public class BookJsonTests {
 
         // TODO: need to refactor with ObjectMapper
 
-        var expectedBook = new Book("1231231231", "Spring boot in action", "JOHNNEd", new BigDecimal("10.20"));
+        var expectedBook = Book.of("1231231231", "Spring boot in action", "JOHNNEd", new BigDecimal("10.20"));
 
         JsonContent<Book> jsonContent = bookJacksonTester.write(expectedBook);
 
@@ -52,7 +52,7 @@ public class BookJsonTests {
 
         assertThat(bookJacksonTester.parse(strBookObject))
                 .usingRecursiveAssertion()
-                .isEqualTo(new Book(
+                .isEqualTo(Book.of(
                         "1234567890",
                         "Title",
                         "Author",

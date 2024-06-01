@@ -14,13 +14,13 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 
+import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.Matchers.is;
 
 
 @WebMvcTest(BookController.class)
@@ -38,7 +38,7 @@ public class BookControllerMvcTests {
     @Test
     void whenPostRequestThenBookIsCreated() throws Exception {
         // GIVEN
-        var expectedBook = new Book("1231231231", "Spring boot in action", "JOHNNEd", new BigDecimal("10.20"));
+        var expectedBook = Book.of("1231231231", "Spring boot in action", "JOHNNEd", new BigDecimal("10.20"));
         String strExpectedBook = objectMapper.writeValueAsString(expectedBook);
 
         //WHEN
