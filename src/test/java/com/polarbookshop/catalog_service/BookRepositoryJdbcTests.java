@@ -35,7 +35,8 @@ public class BookRepositoryJdbcTests {
         var book = Book.of(bookIsbn,
                 "Spring boot in action",
                 "JEACC",
-                new BigDecimal("100.0"));
+                new BigDecimal("100.0"),
+                "Manning!");
         jdbcAggregateTemplate.insert(book);
 
         // WHEN

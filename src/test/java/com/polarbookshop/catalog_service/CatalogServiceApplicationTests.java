@@ -27,7 +27,7 @@ public class CatalogServiceApplicationTests {
     private WebTestClient webTestClient;
 
     private static final String BOOK_ISBN = "1234567891";
-    private static final Book BOOK_TO_CREATE = Book.of(BOOK_ISBN, "spring boot in action!", "BBC", new BigDecimal("10.2"));
+    private static final Book BOOK_TO_CREATE = Book.of(BOOK_ISBN, "spring boot in action!", "BBC", new BigDecimal("10.2"), "manning!");
 
     private static final String ENDPOINT = "/books";
 
@@ -117,7 +117,8 @@ public class CatalogServiceApplicationTests {
                 BOOK_ISBN,
                 UPDATE_TITLE,
                 BOOK_TO_CREATE.author(),
-                BOOK_TO_CREATE.price()
+                BOOK_TO_CREATE.price(),
+                BOOK_TO_CREATE.publisher()
         );
 
         // WHEN

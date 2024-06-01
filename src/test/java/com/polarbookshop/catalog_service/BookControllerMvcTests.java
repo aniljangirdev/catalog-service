@@ -38,7 +38,7 @@ public class BookControllerMvcTests {
     @Test
     void whenPostRequestThenBookIsCreated() throws Exception {
         // GIVEN
-        var expectedBook = Book.of("1231231231", "Spring boot in action", "JOHNNEd", new BigDecimal("10.20"));
+        var expectedBook = Book.of("1231231231", "Spring boot in action", "JOHNNEd", new BigDecimal("10.20"), "Manning!");
         String strExpectedBook = objectMapper.writeValueAsString(expectedBook);
 
         //WHEN

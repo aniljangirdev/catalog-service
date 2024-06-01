@@ -24,6 +24,8 @@ public record Book(
         @LastModifiedDate
         Instant lastModifiedDate,
 
+        String publisher,
+
         @Pattern(message = "The ISBN format must be valid. eg: ISBN-10 or ISBN-13",
                 regexp = "^([0-9]{10}|[0-9]{13})$" // write a regex for number should be allowed 10 or 13 digits only
         )
@@ -44,7 +46,7 @@ public record Book(
         int version
 ) {
 
-    public static Book of(String isbn, String title, String author, BigDecimal price) {
-        return new Book(null, null, null, isbn, title, author, price, 0);
+    public static Book of(String isbn, String title, String author, BigDecimal price, String publisher) {
+        return new Book(null, null, null, publisher,isbn, title, author, price, 0);
     }
 }

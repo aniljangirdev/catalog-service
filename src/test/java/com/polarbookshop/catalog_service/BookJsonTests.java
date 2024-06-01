@@ -23,7 +23,7 @@ public class BookJsonTests {
 
         // TODO: need to refactor with ObjectMapper
 
-        var expectedBook = Book.of("1231231231", "Spring boot in action", "JOHNNEd", new BigDecimal("10.20"));
+        var expectedBook = Book.of("1231231231", "Spring boot in action", "JOHNNEd", new BigDecimal("10.20"), "Manning!");
 
         JsonContent<Book> jsonContent = bookJacksonTester.write(expectedBook);
 
@@ -56,7 +56,8 @@ public class BookJsonTests {
                         "1234567890",
                         "Title",
                         "Author",
-                        new BigDecimal("9.90")
+                        new BigDecimal("9.90"),
+                        "Manning!"
                 ));
     }
 }

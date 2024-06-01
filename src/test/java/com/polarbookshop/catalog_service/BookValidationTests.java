@@ -27,7 +27,8 @@ public class BookValidationTests {
                 "1232567890",
                 "Spring in action",
                 "JOHHNN",
-                new BigDecimal("120.0")
+                new BigDecimal("120.0"),
+                "manning!"
         );
 
         Set<ConstraintViolation<Book>> validate = validator.validate(book);
@@ -40,7 +41,8 @@ public class BookValidationTests {
                 "ISBN11",
                 "spring boot in action",
                 "JEKKY",
-                new BigDecimal("100.00")
+                new BigDecimal("100.00"),
+                "Manning!"
         );
         Set<ConstraintViolation<Book>> validate = validator.validate(book);
         assertThat(validate).isNotEmpty();

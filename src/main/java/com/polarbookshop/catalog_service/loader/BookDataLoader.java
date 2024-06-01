@@ -34,7 +34,8 @@ public class BookDataLoader {
                 "1234567890",
                 "Spring in action",
                 "JOHHN",
-                new BigDecimal("30.20")
+                new BigDecimal("30.20"),
+                "Manning!"
         );
         bookRepository.save(book);
     }
