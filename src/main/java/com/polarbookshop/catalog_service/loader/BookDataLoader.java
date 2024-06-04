@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-//@Profile("testData") instread of this '@ConditionalOnProperty' is more conveniant
+@Profile("testData") // instread of this '@ConditionalOnProperty' is more conveniant
 @ConditionalOnProperty(prefix = "polar.testData", name = "enabled" ,havingValue = "true")
 public class BookDataLoader {
 
