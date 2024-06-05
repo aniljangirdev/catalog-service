@@ -26,6 +26,8 @@ spring:
   sql:
     init:
       mode: NEVER
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
 
 # configure tomcat server
 server:
@@ -36,6 +38,7 @@ server:
     threads:
       max: 50 # default: 200
       min-spare: 5 # min thread always be running default: 10
+  shutdown: graceful
 
 polar:
   greeting: Welcome to the book catalog!
