@@ -1,13 +1,10 @@
 package com.polarbookshop.catalog_service.loader;
 
 import com.polarbookshop.catalog_service.domain.Book;
+import com.polarbookshop.catalog_service.domain.UserData;
 import com.polarbookshop.catalog_service.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnCloudPlatform;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnJava;
+import com.polarbookshop.catalog_service.repository.UserDataRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.cloud.CloudPlatform;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
@@ -21,10 +18,13 @@ import java.math.BigDecimal;
 public class BookDataLoader {
 
     private final BookRepository bookRepository;
+    private final UserDataRepository userDataRepository;
 
-    public BookDataLoader(@Qualifier("inMemoryBookRepository") BookRepository bookRepository) {
+    public BookDataLoader(BookRepository bookRepository, UserDataRepository userDataRepository) {
         this.bookRepository = bookRepository;
+        this.userDataRepository = userDataRepository;
     }
+
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadData() {
@@ -38,5 +38,14 @@ public class BookDataLoader {
                 "Manning!"
         );
         bookRepository.save(book);
+
+        userDataRepository.deleteAll();
+
+        var userData = UserData.of(
+                "sampleUsername",
+                "aniljangir@gmail.com",
+                null
+        );
+        userDataRepository.save(userData);
     }
 }
