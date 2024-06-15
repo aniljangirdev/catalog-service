@@ -1,7 +1,6 @@
 package com.polarbookshop.catalog_service.domain;
 
 import jakarta.validation.constraints.NotNull;
-import org.postgresql.jdbc.PgBlob;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -21,7 +20,7 @@ public record UserData(
         @NotNull(message = "emailId is required!")
         String emailId,
 
-        byte[] image_pic,
+        byte[] imagePic,
 
         @CreatedDate
         Instant createdDate,
