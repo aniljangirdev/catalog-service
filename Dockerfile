@@ -1,5 +1,5 @@
 # docker images
-FROM eclipse-temurin:17
+FROM amazoncorretto:17
 
 WORKDIR workspace
 
