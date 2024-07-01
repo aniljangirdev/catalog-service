@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+
 @RestController
 public class HomeController {
 
@@ -25,7 +26,7 @@ public class HomeController {
         this.userDataRepository = userDataRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/greeting")
     public ResponseEntity<String> getGreeting() {
         return ResponseEntity.ok(polarConfigurationProperties.getGreeting());
     }

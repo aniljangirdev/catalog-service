@@ -58,3 +58,9 @@ logging:
   level:
     root: INFO
     com.polarbookshop.catalog_service: DEBUG
+
+springdoc:
+  version: 1.0.0
+  swagger-ui:
+    use-root-path: true
+  forward-headers-strategy: framework
